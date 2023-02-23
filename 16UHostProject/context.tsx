@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useCallback } from 'react';
 import { ChildrenProps } from './types';
 
 let defValue: any;
@@ -8,6 +7,8 @@ const AppContext = React.createContext(defValue);
 
 const AppProvider = ({ children }: ChildrenProps) => {
     const [showModal, setShowModal] = useState(false);
+
+    useEffect(() => {}, [showModal]);
 
     return (
         <AppContext.Provider value={{ showModal, setShowModal }}>

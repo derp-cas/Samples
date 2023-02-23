@@ -3,37 +3,51 @@ import styled from 'styled-components';
 import { useGlobalContext } from '../context';
 
 export const Modal = () => {
-    const { setShowModal } = useGlobalContext();
+    const { setShowModal, showModal } = useGlobalContext();
+    console.log(showModal);
 
     return (
         <StyledModal>
-            <h1 className='modal__title'>Do you want to continue?</h1>
-            <div className='modal__actions'>
-                <a href='start-hosting/index.html' className='modal__action'>
-                    Yes!
-                </a>
-                <button
-                    className='modal__action modal__action--negative'
-                    type='button'
-                    onClick={() => setShowModal(false)}
-                >
-                    No!
-                </button>
+            <div className={`${showModal ? 'modal show-modal' : 'modal'}`}>
+                <h1 className='modal__title'>Do you want to continue?</h1>
+                <div className='modal__actions'>
+                    <a
+                        href='start-hosting/index.html'
+                        className='modal__action'
+                    >
+                        Yes!
+                    </a>
+                    <button
+                        className='modal__action modal__action--negative'
+                        type='button'
+                        onClick={() => setShowModal(false)}
+                    >
+                        No!
+                    </button>
+                </div>
             </div>
         </StyledModal>
     );
 };
 
 export const StyledModal = styled.div`
-    position: fixed;
-    z-index: 200;
-    top: 20%;
-    left: 30%;
-    width: 40%;
-    background: white;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    .modal {
+        position: fixed;
+        top: 20%;
+        left: 30%;
+        width: 40%;
+        background: white;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        visibility: hidden;
+        z-index: 200;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .show-modal {
+        visibility: visible;
+    }
 
     .modal__title {
         text-align: center;
